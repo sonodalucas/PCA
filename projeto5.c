@@ -30,35 +30,52 @@ applicant scanApplicant(){
 void sortNames(applicant* array, int size){
     
     // Ordenação utilizando insertion sort
-    char key[80];
-    int j;
+    float keyScore;
+    char keyName[80], keyPlacing[80];
+    int j, keyPos;
     for (int i = 1; i < size; i++){
         j = i - 1;
-        strcpy(key, array[i].name);
-        while (j >= 0 && strcmp(array[j].name, key) > 0){
+        keyScore = array[i].average;
+        strcpy(keyName, array[i].name);
+        strcpy(keyPlacing, array[i].placing);
+        keyPos = array[i].pos;
+        strcpy(keyName, array[i].name);
+        while (j >= 0 && strcmp(array[j].name, keyName) > 0){
+            array[j+1].average = array[j].average;
             strcpy(array[j+1].name, array[j].name);
-         //   array[j+1].average = array[j].average;    
+            strcpy(array[j+1].placing, array[j].placing);
+            array[j+1].pos = array[j].pos;
             j--;
         }
-        strcpy(array[j+1].name, key);
-       // array[j+1].average = array[i].average;
+        array[j+1].average = keyScore;
+        strcpy(array[j+1].name, keyName);
+        array[j+1].pos = keyPos;
+        strcpy(array[j+1].placing, keyPlacing);
     }
 }
 
 void sortScores(applicant* array, int size){
     
-    float key;
-    int j;
+    float keyScore;
+    char keyName[80], keyPlacing[80];
+    int j, keyPos;
     for (int i = 1; i < size; i++){
         j = i - 1;
-        key = array[i].average;
-        while (j >= 0 && array[j].average < key){
+        keyScore = array[i].average;
+        strcpy(keyName, array[i].name);
+        strcpy(keyPlacing, array[i].placing);
+        keyPos = array[i].pos;
+        while (j >= 0 && array[j].average < keyScore){
             array[j+1].average = array[j].average;
-         //   strcpy(array[j+1].name, array[j].name);
+            strcpy(array[j+1].name, array[j].name);
+            strcpy(array[j+1].placing, array[j].placing);
+            array[j+1].pos = array[j].pos;
             j--;
         }
-        array[j+1].average = key;
-       // strcpy(array[j+1].name, array[i].name);
+        array[j+1].average = keyScore;
+        strcpy(array[j+1].name, keyName);
+        array[j+1].pos = keyPos;
+        strcpy(array[j+1].placing, keyPlacing);
     }
 }
 
