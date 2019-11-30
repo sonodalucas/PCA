@@ -1,14 +1,13 @@
 #include <stdio.h>
-#include <strings.h>
+#include <string.h>
 #include <ctype.h>
 #include <stdlib.h>
 
-struct applicant{
+typedef struct applicant{
     char name[80], placing[80];
     float prog, eng, essay, softSkill, final, average;
     int pos;
-}
-typedef applicant, applicant;
+}applicant;
 
 
 float finalScore(float prog, float eng, float essay, float softSkill){
@@ -20,7 +19,7 @@ float finalScore(float prog, float eng, float essay, float softSkill){
 applicant scanApplicant(){
     applicant new;
     getchar();
-    scanf(" %s", &new.name);
+    scanf(" %s", new.name);
     scanf("%f %f %f %f", &new.prog, &new.eng, &new.essay, &new.softSkill);
     new.average = finalScore(new.prog, new.eng, new.essay, new.softSkill);
     return new;
@@ -113,6 +112,7 @@ int main(){
     
     sortNames(applicantList, nApplicants);
     printAll(applicantList, nApplicants);
+    free(applicantList);
 
     return 0;
 }
